@@ -59,3 +59,18 @@ class Payment(models.Model):
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='pending')
     def __str__(self):
         return f"{self.tenant.username} - {self.amount}"
+    
+class TotalPayment(models.Model):
+    tenant = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    amount_paid = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_date= models.DateTimeField(auto_now_add=True)
+    payment_method= models.CharField(max_length=50,choices=[
+        ('cash', 'Cash'),
+        ('bank transfer', 'Bank Transfer'),
+        ('mpesa','mpesa'),
+        ('card','card'),
+    ])
+    reference_number = models.CharField(max_length=100, blank=True, null=True)
+    def __str__(self):
+        return f"{self.tenant.username} - KES {self.amount_paid} for {self.property.name}"
