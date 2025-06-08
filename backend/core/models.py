@@ -12,3 +12,25 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    
+class Maintance(models.Model):
+    STATUS_CHOICES =[
+        ('pending', 'Pending'),
+        ('in_progress', 'In Progress'),
+        ('rejected','rejected'),
+        ('done', 'Done'),
+    ]
+    tenants = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    issue_type = models.CharField(max_length=100)
+    property  = models.CharField(max_length=100)
+    description = models.TextField()
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='pending')
+    date = models.DateField(auto_now_add=True)
+    request_date = models.DateTimeField(auto_now_add=True)
+    update_date = models.DateTimeField(auto_now=True)
+    photo = models.ImageField(upload_to='maintenance_photos/', blank=True, null=True)
+    def __str__(self):
+        return self.title
+        
