@@ -74,3 +74,13 @@ class TotalPayment(models.Model):
     reference_number = models.CharField(max_length=100, blank=True, null=True)
     def __str__(self):
         return f"{self.tenant.username} - KES {self.amount_paid} for {self.property.name}"
+class Report(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='reports/')  # Upload path: media/reports/
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title    
+    
