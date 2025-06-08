@@ -21,3 +21,15 @@ def send_rent_due_reminders():
             "Thank you!"
         )
         send_notification_email(subject, message, [tenant_email])
+
+def notify_maintenance_update(maintenance_request):
+    tenant_email = maintenance_request.tenant.email
+    subject = f"Update on Maintenance Request #{maintenance_request.id}"
+    message = (
+        f"Dear {maintenance_request.tenant.username},\n\n"
+        f"Your maintenance request for '{maintenance_request.issue_type}' "
+        f"at {maintenance_request.property.name} has been updated.\n"
+        f"Current status: {maintenance_request.status}\n\n"
+        "Thank you for your patience."
+    )
+    send_notification_email(subject, message, [tenant_email])
