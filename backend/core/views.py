@@ -57,3 +57,16 @@ def send_lease_expiry_alerts():
             f"is expiring on {lease.end_date}."
         )
         send_notification_email(subject_admin, message_admin, [admin_email])
+
+
+def notify_admin_new_maintenance_request(maintenance_request):
+    admin_email = 'admin@example.com'
+    subject = f"New Maintenance Request #{maintenance_request.id}"
+    message = (
+        f"A new maintenance request has been submitted by {maintenance_request.tenant.username} "
+        f"for property {maintenance_request.property.name}.\n"
+        f"Issue: {maintenance_request.issue_type}\n"
+        f"Description: {maintenance_request.description}\n"
+        f"Status: {maintenance_request.status}\n"
+    )
+    send_notification_email(subject, message, [admin_email])
