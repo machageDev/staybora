@@ -80,3 +80,7 @@ def notify_admin_new_payment(payment):
         f"Reference: {payment.reference_number}\n"
     )
     send_notification_email(subject, message, [admin_email])
+def send_otp_email(user_email, otp):
+    subject = "Your OTP Code"
+    message = f"Your one-time password (OTP) is: {otp}"
+    send_mail(subject, message, settings.EMAIL_HOST_USER, [user_email])
