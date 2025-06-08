@@ -33,3 +33,27 @@ def notify_maintenance_update(maintenance_request):
         "Thank you for your patience."
     )
     send_notification_email(subject, message, [tenant_email])
+
+def send_lease_expiry_alerts():
+    alert_date = now().date() + timedelta(days=7)  # 7 days before lease end
+    leases = Lease.objects.filter(end_date=alert_date)
+    
+    for lease in leases:
+        tenant_email = lease.tenant.email
+        admin_email = 'admin@example.com'  # replace with your admin email
+        
+        subject_tenant = "Lease Expiry Reminder"
+        message_tenant = (
+            f"Dear {lease.tenant.username},\n\n"
+            f"Your lease for {lease.property.name} is expiring on {lease.end_date}.\n"
+            "Please contact management to renew or discuss next steps.\n\n"
+            "Thank you!"
+        )
+        send_notification_email(subject_tenant, message_tenant, [tenant_email])
+        
+        subject_admin = "Tenant Lease Expiry Alert"
+        message_admin = (
+            f"Tenant {lease.tenant.username}'s lease for {lease.property.name} "
+            f"is expiring on {lease.end_date}."
+        )
+        send_notification_email(subject_admin, message_admin, [admin_email])
