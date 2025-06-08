@@ -70,3 +70,13 @@ def notify_admin_new_maintenance_request(maintenance_request):
         f"Status: {maintenance_request.status}\n"
     )
     send_notification_email(subject, message, [admin_email])
+def notify_admin_new_payment(payment):
+    admin_email = 'admin@example.com'
+    subject = f"New Payment Received: {payment.amount_paid}"
+    message = (
+        f"Payment of KES {payment.amount_paid} received from {payment.tenant.username} "
+        f"for property {payment.property.name} on {payment.payment_date}.\n"
+        f"Payment Method: {payment.payment_method}\n"
+        f"Reference: {payment.reference_number}\n"
+    )
+    send_notification_email(subject, message, [admin_email])
