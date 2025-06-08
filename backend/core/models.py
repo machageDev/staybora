@@ -16,6 +16,7 @@ class Profile(models.Model):
 class Property(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     def __str__(self):
         return self.name
     
@@ -39,3 +40,10 @@ class Maintance(models.Model):
     def __str__(self):
         return self.title
         
+class Location(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    county = models.CharField(max_length=100)
+    region = models.CharField(max_length=100)
+    def __str__(self):
+        return f"{self.name}, {self.region}, {self.county}"
