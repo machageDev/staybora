@@ -87,7 +87,6 @@ def send_otp_email(user_email, otp):
     subject = "Your OTP Code"
     message = f"Your one-time password (OTP) is: {otp}"
     send_mail(subject, message, settings.EMAIL_HOST_USER, [user_email])
-def generate_otp(length=6):
-    """Generate a numeric OTP of specified length (default 6 digits)."""
+def generate_otp(length=6):   
     otp = ''.join(str(random.randint(0, 9)) for _ in range(length))
     return otp    
