@@ -43,7 +43,7 @@ def send_lease_expiry_alerts():
     
     for lease in leases:
         tenant_email = lease.tenant.email
-        admin_email = 'admin@example.com'  # replace with your admin email
+        admin_email = 'admin@example.com'  
         
         subject_tenant = "Lease Expiry Reminder"
         message_tenant = (
