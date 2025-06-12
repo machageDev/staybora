@@ -38,7 +38,7 @@ def notify_maintenance_update(maintenance_request):
     send_notification_email(subject, message, [tenant_email])
 
 def send_lease_expiry_alerts():
-    alert_date = now().date() + timedelta(days=7)  # 7 days before lease end
+    alert_date = now().date() + timedelta(days=7)  
     leases = Lease.objects.filter(end_date=alert_date)
     
     for lease in leases:
