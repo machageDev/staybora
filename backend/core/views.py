@@ -3,14 +3,14 @@ import random
 from django.core.mail import send_mail
 from django.conf import settings
 
-# Create your views here.
+
 from datetime import datetime, timedelta
 from django.utils.timezone import now
 from .models import Lease
 from .utils import send_notification_email
 
 def send_rent_due_reminders():
-    reminder_date = now().date() + timedelta(days=3)  # 3 days before due
+    reminder_date = now().date() + timedelta(days=3)  
     leases = Lease.objects.filter(rent_due_date=reminder_date)
     
     for lease in leases:
