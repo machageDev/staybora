@@ -9,6 +9,13 @@ from django.utils.timezone import now
 from .models import Lease
 from .utils import send_notification_email
 
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
+from rest_framework import status
+
 def send_rent_due_reminders():
     reminder_date = now().date() + timedelta(days=3)  
     leases = Lease.objects.filter(rent_due_date=reminder_date)
