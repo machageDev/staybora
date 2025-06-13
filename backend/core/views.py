@@ -91,11 +91,6 @@ def generate_otp(length=6):
     otp = ''.join(str(random.randint(0, 9)) for _ in range(length))
     return otp    
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate
-from rest_framework import status
 
 class LoginView(APIView):
     def post(self, request):
