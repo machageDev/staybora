@@ -50,6 +50,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
      "corsheaders.middleware.CorsMiddleware",
 ]
+# Allow all or specific domains
+CORS_ALLOW_ALL_ORIGINS = True
+# OR
+# CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 
 ROOT_URLCONF = 'backend.urls'
 
