@@ -111,16 +111,22 @@ class LoginView(APIView):
         else:
             return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
         import json
+# yourapp/views.py
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 @csrf_exempt
-def save_location(request):
-    if request.method == 'POST':
+def receive_location(request):
+    if request.method == "POST":
         data = json.loads(request.body)
-        latitude = data.get('latitude')
-        longitude = data.get('longitude')
+        latitude = data.get("latitude")
+        longitude = data.get("longitude")
 
-        # You can save this to a model or use it however you want
-        print(f"Latitude: {latitude}, Longitude: {longitude}")
-        return JsonResponse({'status': 'success'})
+        print(f"Received location: {latitude}, {longitude}")
+        # Optional: save to DB or do processing
+
+        return JsonResponse({"message": "Location received"}, status=200)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
